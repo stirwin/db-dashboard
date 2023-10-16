@@ -12,8 +12,6 @@
             <span>db-dashboard</span>
         </a>
 
-        <hr class="border-gray-300 p-2" />
-
         <!-- menu general -->
         <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
             <span class="px-6 py-4 text-[0.7rem] font-bold uppercase text-gray-600 dark:text-gray-400">dashboard</span>
@@ -32,7 +30,7 @@
             </li>
             <!-- menu general -->
 
-            <hr class="border-gray-300 p-2" />
+            {{-- <hr class="border-gray-300 p-2" /> --}}
 
             <!-- menu administrador -->
             <li class="relative">
@@ -108,7 +106,7 @@
             </li>
             <!-- menu administrador -->
 
-            <hr class="border-gray-300 p-2" />
+            {{-- <hr class="border-gray-300 p-2" /> --}}
 
         </ul>
     </nav>
@@ -135,7 +133,7 @@
 
             <!-- Search form -->
             <form class="relative ml-4 mr-auto flex flex-wrap items-stretch xl:mx-0">
-                <input autocomplete="off" type="search"
+                <input id="search" name="search" autocomplete="off" type="search"
                     class="relative m-0 inline-block w-[1%] min-w-[225px] flex-auto rounded border border-solid border-gray-300 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition duration-300 ease-in-out focus:border-primary-600 focus:text-gray-700 focus:shadow-te-primary focus:outline-none dark:text-gray-200 dark:placeholder:text-gray-200"
                     placeholder='Search (ctrl + "/" to focus)' />
                 <span
