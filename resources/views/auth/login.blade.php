@@ -31,8 +31,8 @@
                                         </p>
 
                                         <!--Email input-->
-                                        <div class="mb-3 inline-flex w-full items-center rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700"
-                                            role="alert">
+                                        {{-- <div
+                                            class="mb-3 inline-flex w-full items-center rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700">
                                             <span class="mr-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                     fill="currentColor" class="h-5 w-5">
@@ -42,7 +42,9 @@
                                                 </svg>
                                             </span>
                                             las credenciales no coinciden con nuestros registros
-                                        </div>
+                                        </div> --}}
+
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         <div class="relative mb-3">
                                             <input type="email"
                                                 class="peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
@@ -75,7 +77,8 @@
                                             </div>
 
                                             <!--Forgot password link-->
-                                            <a href="#!">{{ Str::upper(__('Forgot your password?')) }}</a>
+                                            <a
+                                                href="{{ route('password.request') }}">{{ Str::upper(__('Forgot your password?')) }}</a>
                                         </div>
 
                                         <!--Submit button-->
@@ -102,15 +105,11 @@
                             <div class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
                                 style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)">
                                 <div class="px-4 py-6 text-white md:mx-6 md:p-12">
-                                    <h4 class="mb-6 text-xl font-semibold">
-                                        We are more than just a company
+                                    <h4 class="mb-6 text-xl text-center font-bold">
+                                        {{ Str::upper(__('db dashboard')) }}
                                     </h4>
                                     <p class="text-sm">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                                        elit, sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                        ea commodo consequat.
+                                        {{ Str::upper(__('db dashboard es una plataforma e-commerce que implementa tecnologias como laravel, tailwind element, alpinejs, entre otros')) }}
                                     </p>
                                 </div>
                             </div>
