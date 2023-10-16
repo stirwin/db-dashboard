@@ -9,13 +9,17 @@
             data-te-ripple-color="primary">
             <img id="te-logo" class="mr-2 w-8" src="https://tailwind-elements.com/img/logo.png" alt="TE Logo"
                 draggable="false" />
-            <span>Tailwind Elements</span>
+            <span>db-dashboard</span>
         </a>
 
+        <hr class="border-gray-300 p-2" />
+
+        <!-- menu general -->
         <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
+            <span class="px-6 py-4 text-[0.7rem] font-bold uppercase text-gray-600 dark:text-gray-400">dashboard</span>
             <li class="relative">
                 <a class="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-700 outline-none transition duration-300 ease-linear hover:bg-primary-400/10 hover:text-primary-600 hover:outline-none focus:bg-primary-400/10 focus:text-primary-600 focus:outline-none active:bg-primary-400/10 active:text-primary-600 active:outline-none data-[te-sidenav-state-active]:text-primary-600 data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
-                    href="#!" data-te-sidenav-link-ref>
+                    href="{{ route('dashboard') }}" data-te-sidenav-link-ref>
                     <span
                         class="mr-4 [&>svg]:h-3.5 [&>svg]:w-3.5 [&>svg]:fill-gray-700 [&>svg]:transition [&>svg]:duration-300 [&>svg]:ease-linear group-hover:[&>svg]:fill-primary-600 group-focus:[&>svg]:fill-primary-600 group-active:[&>svg]:fill-primary-600 group-[te-sidenav-state-active]:[&>svg]:fill-primary-600 motion-reduce:[&>svg]:transition-none dark:[&>svg]:fill-gray-300 dark:group-hover:[&>svg]:fill-gray-300 ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -26,7 +30,14 @@
                     </span>
                     <span>Webiste traffic</span></a>
             </li>
+            <!-- menu general -->
+
+            <hr class="border-gray-300 p-2" />
+
+            <!-- menu administrador -->
             <li class="relative">
+                <span
+                    class="px-6 py-4 text-[0.7rem] font-bold uppercase text-gray-600 dark:text-gray-400">administracion</span>
                 <a class="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-700 outline-none transition duration-300 ease-linear hover:bg-primary-400/10 hover:text-primary-600 hover:outline-none focus:bg-primary-400/10 focus:text-primary-600 focus:outline-none active:bg-primary-400/10 active:text-primary-600 active:outline-none data-[te-sidenav-state-active]:text-primary-600 data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                     data-te-sidenav-link-ref>
                     <span
@@ -60,6 +71,7 @@
                     </li>
                 </ul>
             </li>
+
             <li class="relative">
                 <a class="group flex h-12 cursor-pointer items-center truncate rounded-[5px] px-6 py-4 text-[0.875rem] text-gray-700 outline-none transition duration-300 ease-linear hover:bg-primary-400/10 hover:text-primary-600 hover:outline-none focus:bg-primary-400/10 focus:text-primary-600 focus:outline-none active:bg-primary-400/10 active:text-primary-600 active:outline-none data-[te-sidenav-state-active]:text-primary-600 data-[te-sidenav-state-focus]:outline-none motion-reduce:transition-none dark:text-gray-300 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:active:bg-white/10"
                     data-te-sidenav-link-ref>
@@ -94,6 +106,10 @@
                     </li>
                 </ul>
             </li>
+            <!-- menu administrador -->
+
+            <hr class="border-gray-300 p-2" />
+
         </ul>
     </nav>
     <!-- Sidenav -->
@@ -326,16 +342,23 @@
                         aria-labelledby="dropdownMenuButton2" data-te-dropdown-menu-ref>
                         <li>
                             <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-gray-700 hover:bg-gray-100 active:text-zinc-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-gray-400 dark:text-gray-200 dark:hover:bg-white/30"
-                                href="#" data-te-dropdown-item-ref>My profile</a>
+                                href="{{ route('profile.edit') }}" data-te-dropdown-item-ref>My profile</a>
                         </li>
                         <li>
                             <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-gray-700 hover:bg-gray-100 active:text-zinc-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-gray-400 dark:text-gray-200 dark:hover:bg-white/30"
                                 href="#" data-te-dropdown-item-ref>Settings</a>
                         </li>
-                        <li>
-                            <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-gray-700 hover:bg-gray-100 active:text-zinc-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-gray-400 dark:text-gray-200 dark:hover:bg-white/30"
-                                href="#" data-te-dropdown-item-ref>Logout</a>
-                        </li>
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <li>
+                                <a class="block w-full whitespace-nowrap bg-transparent px-4 py-2 text-sm font-normal text-gray-700 hover:bg-gray-100 active:text-zinc-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-gray-400 dark:text-gray-200 dark:hover:bg-white/30"
+                                    href="{{ 'route.logout' }}"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();"
+                                    data-te-dropdown-item-ref>Logout</a>
+                            </li>
+                        </form>
                     </ul>
                 </li>
             </ul>
