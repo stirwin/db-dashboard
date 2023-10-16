@@ -1,14 +1,7 @@
-import {
-    Sidenav,
-    Dropdown,
-    Ripple,
-    initTE,
-} from "tw-elements";
-
-initTE({ Sidenav, Dropdown, Ripple });
+import tw_elements from './tw-elements.js';
 
 const sidenav2 = document.getElementById("sidenav-1");
-const sidenavInstance2 = Sidenav.getInstance(sidenav2);
+const sidenavInstance2 = tw_elements.Sidenav.getInstance(sidenav2);
 
 let innerWidth2 = null;
 
