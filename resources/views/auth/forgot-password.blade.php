@@ -1,8 +1,5 @@
 <x-guest-layout>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
     <section class="gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
         <div class="container h-screen p-10">
             <div class="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
@@ -22,10 +19,24 @@
                                         </h4>
                                     </div>
 
-                                    <form method="POST" action="{{ route('login') }}">
+                                    <!--mensaje de reestablecimiento de contraseña-->
+                                    @if (session('status'))
+                                        <div class="mb-4 rounded-lg bg-success-100 px-6 py-5 text-base text-success-700"
+                                            role="alert">
+                                            <h4 class="mb-2 text-2xl font-medium leading-tight">
+                                                {{ Str::upper(__('Reset Password Notification')) }}</h4>
+                                            <p class="mb-4">
+                                                <!-- Session Status -->
+                                                <x-auth-session-status class="mb-4" :status="session('status')" />
+                                            </p>
+                                        </div>
+                                    @endif
+
+                                    <form method="POST" action="{{ route('password.request') }}">
                                         @csrf
                                         @method('POST')
 
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         <!--Email input-->
                                         <div class="relative mb-3">
                                             <input type="email"
@@ -43,14 +54,14 @@
                                                 class="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]"
                                                 type="submit" data-te-ripple-init data-te-ripple-color="light"
                                                 style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);">
-                                                {{ Str::upper(__('Log in')) }}
+                                                {{ Str::upper(__('Update Password')) }}
                                             </button>
 
                                             <!-- Register link -->
                                             <p class="mb-0 mt-2 pt-1 text-sm font-semibold">
-                                                {{ Str::upper(__('Do not have an account?')) }}
-                                                <a href="{{ route('login') }}"
-                                                    class="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700">{{ Str::upper(__('Register')) }}</a>
+                                                {{ Str::upper(__('Already registered?')) }}
+                                                <a href="{{ route('register') }}"
+                                                    class="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700">{{ Str::upper(__('Log in')) }}</a>
                                             </p>
                                         </div>
                                     </form>

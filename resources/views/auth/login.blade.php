@@ -1,8 +1,5 @@
 <x-guest-layout>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
     <section class="gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
         <div class="container h-full p-10">
             <div class="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
@@ -30,21 +27,46 @@
                                             {{ Str::upper(__('Please login to your account')) }}
                                         </p>
 
-                                        <!--Email input-->
-                                        {{-- <div
-                                            class="mb-3 inline-flex w-full items-center rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700">
-                                            <span class="mr-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    fill="currentColor" class="h-5 w-5">
-                                                    <path fill-rule="evenodd"
-                                                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </span>
-                                            las credenciales no coinciden con nuestros registros
-                                        </div> --}}
+                                        <!--mensaje de confirmacion de reestablecimiento de contraseña-->
+                                        @if (session('status'))
+                                            <div class="mb-3 hidden w-full items-center rounded-lg bg-success-100 px-6 py-5 text-base text-success-800 data-[te-alert-show]:inline-flex"
+                                                role="alert" data-te-alert-init data-te-alert-show>
+                                                <!-- Session Status -->
+                                                <x-auth-session-status class="mb-4" :status="session('status')" />
+                                                <button type="button"
+                                                    class="ml-auto box-content rounded-none border-none p-1 text-success-900 opacity-50 hover:text-success-900 hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                                                    data-te-alert-dismiss aria-label="Close">
+                                                    <span
+                                                        class="w-[1em] focus:opacity-100 disabled:pointer-events-none disabled:select-none disabled:opacity-25 [&.disabled]:pointer-events-none [&.disabled]:select-none [&.disabled]:opacity-25">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                            fill="currentColor" class="h-6 w-6">
+                                                            <path fill-rule="evenodd"
+                                                                d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        @endif
 
-                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
+                                        <!--error de credenciales-->
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2">
+                                            <div
+                                                class="mb-3 inline-flex w-full items-center rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700">
+                                                <span class="mr-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="currentColor" class="h-5 w-5">
+                                                        <path fill-rule="evenodd"
+                                                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </span>
+                                                las credenciales no coinciden con nuestros registros
+                                            </div>
+                                        </x-input-error>
+
+                                        <!--Email input-->
                                         <div class="relative mb-3">
                                             <input type="email"
                                                 class="peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
@@ -93,7 +115,7 @@
                                             <!-- Register link -->
                                             <p class="mb-0 mt-2 pt-1 text-sm font-semibold">
                                                 {{ Str::upper(__('Do not have an account?')) }}
-                                                <a href="#!"
+                                                <a href="{{ route('register') }}"
                                                     class="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700">{{ Str::upper(__('Register')) }}</a>
                                             </p>
                                         </div>
