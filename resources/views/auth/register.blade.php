@@ -18,40 +18,72 @@
                                         </h4>
                                     </div>
 
+                                    <p class="text-center font-semibold mb-4">
+                                        {{ Str::upper(__('Register')) }}
+                                    </p>
+
+                                    <!--mensaje de errores del formulario-->
+                                    @if ($errors->any())
+                                        <div class="mb-3 inline-flex w-full items-center rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700"
+                                            role="alert" data-te-alert-init data-te-alert-show>
+                                            <span class="mr-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="currentColor" class="h-5 w-5">
+                                                    <path fill-rule="evenodd"
+                                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </span>
+
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+
+                                            <button type="button"
+                                                class="ml-auto box-content rounded-none border-none p-1 text-danger-900 opacity-50 hover:text-danger-900 hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                                                data-te-alert-dismiss aria-label="Close">
+                                                <span
+                                                    class="w-[1em] focus:opacity-100 disabled:pointer-events-none disabled:select-none disabled:opacity-25 [&.disabled]:pointer-events-none [&.disabled]:select-none [&.disabled]:opacity-25">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="currentColor" class="h-6 w-6">
+                                                        <path fill-rule="evenodd"
+                                                            d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    @endif
+
                                     <form method="POST" action="{{ route('register') }}">
                                         @csrf
                                         @method('POST')
 
-                                        <p class="text-center font-semibold mb-4">
-                                            {{ Str::upper(__('Register')) }}
-                                        </p>
-
                                         <!--Name input-->
-                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                         <div class="relative mb-3">
                                             <input type="name"
                                                 class="peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
-                                                id="name" name="name" required autofocus autocomplete="name"
-                                                placeholder="first name" />
+                                                id="name" name="name" value="{{ old('name') }}" required
+                                                autofocus autocomplete="name" placeholder="first name" />
                                             <label for="name"
                                                 class="pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-neutral-500 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
                                                 {{ Str::upper(__('Name')) }}</label>
                                         </div>
 
                                         <!--Email input-->
-                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         <div class="relative mb-3">
                                             <input type="email"
                                                 class="peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-600 dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
-                                                id="email" name="email" required autofocus autocomplete="email"
-                                                placeholder="email@example.com" />
+                                                id="email" name="email" value="{{ old('email') }}" required
+                                                autofocus autocomplete="email" placeholder="email@example.com" />
                                             <label for="email"
                                                 class="pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-neutral-500 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">
                                                 {{ Str::upper(__('Email')) }}</label>
                                         </div>
 
                                         <!--Password input-->
-                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                         <div class="relative mb-3">
                                             <input type="password"
                                                 class="peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:shadow-te-primary focus:outline-none peer-focus:text-primary dark:border-neutral-600 dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
@@ -61,7 +93,6 @@
                                         </div>
 
                                         <!--Confirm Password input-->
-                                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                         <div class="relative mb-3">
                                             <input type="password"
                                                 class="peer m-0 block h-[58px] w-full rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:shadow-te-primary focus:outline-none peer-focus:text-primary dark:border-neutral-600 dark:text-neutral-200 dark:focus:border-primary dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
